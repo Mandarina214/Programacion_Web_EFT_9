@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Juegos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-800 p-6">
+    <h1 class="text-3xl font-bold mb-6">Resultados para "{{ query }}"</h1>
+
+    <form method="get" class="mb-6">
+        <input name="q" placeholder="Buscar juego..." class="p-2 border rounded w-64" value="{{ query }}">
+        <button class="bg-blue-600 text-white p-2 rounded">Buscar</button>
+    </form>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% for juego in juegos %}
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">{{ juego.name }}</h2>
+
+            {% if juego.background_image %}
+            <img src="{{ juego.background_image }}" alt="{{ juego.name }}"
+                class="mb-2 w-full h-48 object-cover rounded">
+            {% endif %}
+
+            <p class="text-sm">
+                Plataformas:
+                {% for p in juego.platforms %}
+                {{ p.platform.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+
+            <p class="mt-2 font-semibold text-green-700">
+                Precio estimado: {{ juego.precio_usd }} USD (~{{ juego.precio_clp }} CLP)
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

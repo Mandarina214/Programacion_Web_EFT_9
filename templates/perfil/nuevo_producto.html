@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Registrar Producto</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container" style="margin-bottom: -2rem;">
+        <a class="navbar-brand" href="../index.html">
+            <img src="../assets/imgs/logo.png" alt="logo" height="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+                   <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'categorias' %}">Categorías</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'productos' %}">Productos</a></li>
+
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'perfil' %}">Perfil</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a></li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registro</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+            <div class="icon-cart ms-3">
+                <i class="ri-shopping-cart-line"></i>
+                <span class="cart-item-count"></span>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="cart">
+    <h2 class="cart-title">Carrito</h2>
+    <div class="cart-content">
+    </div>
+    <div class="total">
+      <div class="total-title">Total</div>
+      <div class="total-price">$0</div>
+    </div>
+    <button class="btn-buy">Comprar</button>
+    <i class="ri-close-circle-fill" id="cart-close"></i>
+  </div>
+    <div class="category-router">
+      <a href="{% url 'perfil' %}">Mi Perfil</a> / Registrar Producto
+     </div>
+    <div class="form-container">
+        <div class="form-card">
+            <h2><i class="ri-file-add-line"></i> Registrar Producto</h2>
+            <form id="form-user" method="post">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="input-nombres" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="input-nombres" placeholder="Nombre del producto" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="input-imagen" class="form-label">Imagen del Producto</label>
+                        <input type="file" class="form-control" id="input-imagen" accept="image/*" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea id="descripcion" class="form-control" rows="2" placeholder="Descripción del producto" required></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="c1" class="form-label">Característica 1</label>
+                        <input type="text" class="form-control" id="c1" placeholder="Ej. Multijugador" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="c2" class="form-label">Característica 2</label>
+                        <input type="text" class="form-control" id="c2" placeholder="Ej. 4K UHD" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="c3" class="form-label">Característica 3</label>
+                        <input type="text" class="form-control" id="c3" placeholder="Ej. Acción/RPG" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="c4" class="form-label">Característica 4</label>
+                        <input type="text" class="form-control" id="c4" placeholder="Ej. Modo historia" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="c5" class="form-label">Característica 5</label>
+                        <input type="text" class="form-control" id="c5" placeholder="Ej. Edición especial">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="c6" class="form-label">Característica 6</label>
+                        <input type="text" class="form-control" id="c6" placeholder="Ej. Incluye DLC">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="input-precio" class="form-label">Precio</label>
+                        <input type="text" class="form-control" id="input-precio" placeholder="$0" required>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="reset" class="btn btn-light">Cancelar</button>
+                    <button type="submit" class="btn" style="background-color: #0dcaf0;">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>RetroPlay 2025</p>
+    </footer>
+
+    <script src="{% static 'assets/js/register.js' %}"></script>
+    <script src="{% static 'assets/js/cart.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
